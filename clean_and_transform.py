@@ -57,8 +57,4 @@ for col, replace in replacements.items():
 df['order_date'] = pd.to_datetime(df['order_date'], format='%m/%d/%Y %H:%M')
 df['order_date'] = df['order_date'].dt.strftime('%m/%d/%Y')
 
-df_avg_price = df.groupby('product_code')['price_each'].mean().round(2)
-df = df.merge(df_avg_price, how='left', on='product_code')
-df = df.rename(columns={'price_each_y': 'avg_price'})
-
 df.to_csv(path + '_fixed' + ext, index=False)
